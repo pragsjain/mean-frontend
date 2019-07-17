@@ -1,0 +1,58 @@
+<div>
+  <br>
+  <mat-card>
+    <section class="mat-typography">
+      <h3>Create a new Employee</h3>
+    </section>
+    <mat-divider></mat-divider>
+    <br>
+    <form [formGroup]="createForm" class="create-form">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder ="Name" formControlName="name" #name>
+      </mat-form-field>
+      <mat-radio-group formControlName="gender" class="field-full-width">
+          <mat-radio-button value="Male">Male &nbsp; &nbsp; &nbsp; &nbsp;</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field class="field-full-width">
+          <mat-label>Skills</mat-label>
+          <mat-select formControlName="skills" multiple>
+            <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder ="Salary in L.P.A." formControlName="salary" #salary> 
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder ="Position" formControlName="position" #position>
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <mat-select placeholder ="Experience" formControlName="experience" #experience>
+          <mat-option value="1-2">1-2 Years</mat-option>
+          <mat-option value="2-3">2-3 Years</mat-option>
+          <mat-option value="3-5">3-5 Years</mat-option>
+          <mat-option value="5-10">5-10 Years</mat-option>
+          <mat-option value="10+">10+ Years</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder ="D.O.B." [matDatepicker]="picker1" placeholder="D.O.B." formControlName="dob" #dob>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>    
+        <input 
+        style="display:none"
+        type="file"
+        (change)="onFileSelected($event)"
+         #fileInput
+        >
+        <button type="button" mat-raised-button (click)="fileInput.click()">Pick File</button>
+        <br><br>
+      <mat-divider></mat-divider>
+      <br><br>
+      <button mat-raised-button color="accent" routerLink="/list">Back</button> &nbsp;
+      <button type="submit" (click)="addEmployee(createForm.value)" [disabled]="createForm.pristine ||createForm.invalid" mat-raised-button color="primary" >Save</button>
+    </form>
+  </mat-card>
+</div>
